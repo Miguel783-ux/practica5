@@ -1,13 +1,39 @@
-class Vector:
-    def __init__(self,x,y,z):
-        self.x=x
-        self.y=y
-        self.z=z
-    def __add__(self, o):
-        return Vector(self.x +o.x,self.y+o.y,self.z+o.z)
-    def __str__(self):
-        return f"({self.x},{self.y},{self.z}"
-v1= Vector(3,4,5)
-v2=Vector(1,2,3)
-resultado=v1+v2
-print(f"la suma de {v1}y{v2}es {resultado}")
+import math
+
+class EcuacionCuadratica:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def getDiscriminante(self):
+        return self.b ** 2 - 4 * self.a * self.c
+
+    def getRaiz1(self):
+        discriminante = self.getDiscriminante()
+        if discriminante >= 0:
+            return (-self.b + math.sqrt(discriminante)) / (2 * self.a)
+        return None
+
+    def getRaiz2(self):
+        discriminante = self.getDiscriminante()
+        if discriminante > 0:
+            return (-self.b - math.sqrt(discriminante)) / (2 * self.a)
+        return None
+
+    def resolver(self):
+        discriminante = self.getDiscriminante()
+        if discriminante > 0:
+            r1 = self.getRaiz1()
+            r2 = self.getRaiz2()
+            print(f"Las raíces de la ecuación son: r1 = {r1:.4f}, r2 = {r2:.4f}")
+        elif discriminante == 0:
+            r1 = self.getRaiz1()
+            print(f"La ecuación tiene una única raíz: r = {r1:.4f}")
+        else:
+            print("La ecuación no tiene raíces reales.")
+a = float(input("Ingrese el coeficiente a: "))
+b = float(input("Ingrese el coeficiente b: "))
+c = float(input("Ingrese el coeficiente c: "))
+ecuacion = EcuacionCuadratica(a, b, c)
+ecuacion.resolver()
